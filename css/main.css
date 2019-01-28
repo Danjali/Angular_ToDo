@@ -79,3 +79,23 @@ body {
     color: #000000;
     font-size: 14px;
 }
+
+input[type=button]:disabled,
+button[disabled]{
+  color: #a9a9a9;
+}
+
+input[type=button]:enabled,
+button[enabled]{
+  color: #000000;
+}
+
+button:disabled,
+button[disabled]{
+  color: #a9a9a9;
+}
+
+button:enabled,
+button[enabled]{
+  color: #000000;
+}

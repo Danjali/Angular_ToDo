@@ -13,7 +13,7 @@
       <div class="container">
         <h1> {{ title }} </h1>
         <div ng-show= "todoList.length">
-          <input type="button" value="Mark Complete" ng-click="markAsComplete()" title="Mark as complete" ng-disabled="buttonValue==='Update'">
+          <input type="button" value="Mark Complete" ng-click="markAsComplete()" title="Mark as complete" ng-disabled="!disableMarkCompleted">
           <input type="button" value="Remove All" ng-click="removeAll()" title="Remove all">
           <input type="text" ng-model="searchInput.todoText" size="30"  placeholder="Search task"><button ng-click="searchInput.todoText = ''">x</button>
         </div>
@@ -35,7 +35,7 @@
           </div>
           <div class="Row" ng-repeat="x in todoList | filter : searchInput">
             <div class= "discriptionCell">
-              <input type= "checkbox" ng-model="x.done" ng-disabled=x.flag>
+              <input type= "checkbox" ng-model="x.done" ng-disabled=x.flag ng-click="defineMarkCompleteState()">
               <span ng-bind="x.todoText" title={{x.todoText}}></span>
             </div>
             <div class= "Cell">

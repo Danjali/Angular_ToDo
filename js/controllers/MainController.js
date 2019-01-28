@@ -52,6 +52,7 @@ app.controller('MainController', ['$scope', function ($scope) {
       $scope.completedList = list.filter(item => item.done === true);
       // adding property 'flag' to each object of the array to show
       $scope.completedList.map(item => item.flag = true);
+      $scope.disableMarkCompleted = false;
       sortTheList($scope.todoList);
    };
 
@@ -68,6 +69,11 @@ app.controller('MainController', ['$scope', function ($scope) {
             $scope.editedId = id;
          }
       })
+   };
+
+   $scope.defineMarkCompleteState = function () {
+      $scope.disableMarkCompleted = $scope.todoList.some(item => item.done === true);
+      return $scope.disableMarkCompleted; // this will act as a flag to enable/disable the markAsComplete button
    };
 
    sortTheList = function (updatedList) { //completed tasks will be moved to end of the list
