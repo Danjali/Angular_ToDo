@@ -44,20 +44,16 @@ body {
 
 .Cell {
     display: table-cell;
-    /* border: solid; */
     border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding :0 5px 0 5px;
     min-width: 232px;
     max-width: 150;
 }
 
 .discriptionCell {
     display: table-cell;
-    /* border: solid; */
     border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding :0 5px 0 5px;
     min-width: 350px;
     max-width: 350px;
     white-space: nowrap;

@@ -11,18 +11,25 @@ app.controller('MainController', ['$scope', function ($scope) {
                done: false
             });
             $scope.todoInput = '';
-         } else if (checkDuplicate($scope.todoList)) {
-            alert('Duplicate Task');
+            $scope.warningFlag = false;
+         } else if (checkwarningFlag($scope.todoList)) {
+            $scope.warningFlag = true;
+            $scope.msg = 'Warning!! Duplicate Task.';
          } else if ($scope.todoInput) {
             $scope.todoList.push({
                todoText: $scope.todoInput,
                done: false
             });
             $scope.todoInput = '';
+            $scope.warningFlag = false;
+         } else {
+            $scope.warningFlag = true;
+            $scope.msg = 'Empty task cannot be added!!';
          }
       } else {
-         if (checkDuplicate($scope.todoList)) {
-            alert('Duplicate Task');
+         if (checkwarningFlag($scope.todoList)) {
+            $scope.warningFlag = true;
+            $scope.msg = 'Warning!! Duplicate Task.';
          } else if ($scope.todoInput) {
             $scope.todoList[$scope.editedId] = {
                todoText: $scope.todoInput,
@@ -30,11 +37,12 @@ app.controller('MainController', ['$scope', function ($scope) {
             };
             $scope.todoInput = '';
             $scope.buttonValue = 'Add';
+            $scope.warningFlag = false;
          } else {
-            alert('Task is empty. Add Task!!')
+            $scope.msg = 'Empty task cannot be added!!';
          }
       }
-      sortTheList($scope.todoList);
+      sortList($scope.todoList);
    };
 
    $scope.removeFromList = function (id) {
@@ -53,7 +61,7 @@ app.controller('MainController', ['$scope', function ($scope) {
       // adding property 'flag' to each object of the array to show
       $scope.completedList.map(item => item.flag = true);
       $scope.disableMarkCompleted = false;
-      sortTheList($scope.todoList);
+      sortList($scope.todoList);
    };
 
    $scope.removeAll = function () {
@@ -76,11 +84,11 @@ app.controller('MainController', ['$scope', function ($scope) {
       return $scope.disableMarkCompleted; // this will act as a flag to enable/disable the markAsComplete button
    };
 
-   sortTheList = function (updatedList) { //completed tasks will be moved to end of the list
+   sortList = function (updatedList) { //completed tasks will be moved to end of the list
       $scope.todoList = updatedList.sort((a, b) => a.done - b.done);
    };
 
-   checkDuplicate = function (list) {
+   checkwarningFlag = function (list) {
       let validateFlag;
       list.forEach(item => {
          if (item.todoText === $scope.todoInput) {
